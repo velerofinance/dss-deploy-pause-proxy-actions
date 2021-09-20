@@ -49,18 +49,18 @@ contract DssDeployPauseProxyActionsTest is DssDeployTestBase, ProxyCalls {
     }
 
     function testFile2() public {
-        (,,, uint line,) = vat.ilks("ETH");
+        (,,, uint line,) = vat.ilks("VLX");
         assertEq(line, 10000 * 10 ** 45);
-        this.file(address(pause), address(govActions), address(vat), bytes32("ETH"), bytes32("line"), uint(20000 * 10 ** 45));
-        (,,, line,) = vat.ilks("ETH");
+        this.file(address(pause), address(govActions), address(vat), bytes32("VLX"), bytes32("line"), uint(20000 * 10 ** 45));
+        (,,, line,) = vat.ilks("VLX");
         assertEq(line, 20000 * 10 ** 45);
     }
 
     function testFile3() public {
-        (PipLike pip,) = spotter.ilks("ETH");
-        assertEq(address(pip), address(pipETH));
-        this.file(address(pause), address(govActions), address(spotter), bytes32("ETH"), bytes32("pip"), address(123));
-        (pip,) = spotter.ilks("ETH");
+        (PipLike pip,) = spotter.ilks("VLX");
+        assertEq(address(pip), address(pipVLX));
+        this.file(address(pause), address(govActions), address(spotter), bytes32("VLX"), bytes32("VLX"), address(123));
+        (pip,) = spotter.ilks("VLX");
         assertEq(address(pip), address(123));
     }
 
@@ -71,10 +71,10 @@ contract DssDeployPauseProxyActionsTest is DssDeployTestBase, ProxyCalls {
     }
 
     function testDripAndFile() public {
-        (uint duty,) = jug.ilks("ETH");
+        (uint duty,) = jug.ilks("VLX");
         assertEq(duty, 10 ** 27);
-        this.file(address(pause), address(govActions), address(jug), bytes32("ETH"), bytes32("duty"), uint(2 * 10 ** 27));
-        (duty,) = jug.ilks("ETH");
+        this.file(address(pause), address(govActions), address(jug), bytes32("VLX"), bytes32("duty"), uint(2 * 10 ** 27));
+        (duty,) = jug.ilks("VLX");
         assertEq(duty, 2 * 10 ** 27);
     }
 
